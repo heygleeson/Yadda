@@ -62,13 +62,13 @@ ChatterScript files must be a UTF-8 text file without BOM set.
 
 ### Lines
 
-The *line* is the common unit that comprises all elements in a yarn file.
+The *line* is the common unit that comprises all elements in a ChatterScript file.
 A line is a series of characters terminated by the *new line* symbol.
 The new line symbol should be the `\n` character.
 The new line must be the same throughout the project regardless of the chosen new line symbol.
 
-The following Yarn file contains four lines (in order); one header tag line, one header delimiter line, one body dialogue line, one body delimiter line.
-```yarn
+The following ChatterScript file contains four lines (in order); one header tag line, one header delimiter line, one body dialogue line, one body delimiter line.
+```
 Title:Start
 ---
 This is some text
@@ -84,7 +84,7 @@ Whitespace for lines of dialogue plays no role but has significant syntactic imp
 
 ### Project
 
-The yarn *project* is all yarn files that are intended to be associated with one another.
+The ChatterScript *project* is all ChatterScript files that are intended to be associated with one another.
 While there is nothing stopping a writer from placing all nodes into one big file (or even making one giant node) it is common to break them up over multiple files.
 The project is all of these files collected and processed by the implementing program together.
 
@@ -94,20 +94,20 @@ A comment is a line that starts with the `//` symbol.
 All text from the start of the comment to the end of the line must be ignored.
 A comment starting in the middle of another line ends that line at the point the `//` symbol is encountered.
 That line is assumed to have finished at that point as if the comment was not there.
-Comments must not impact the rest of the lines or have any impact on the resulting yarn program.
+Comments must not impact the rest of the lines or have any impact on the resulting ChatterScript program.
  
 ### Identifiers
 
-Throughout various points in this document identifiers are mentioned, the rules for these are shared across all stages of the Yarn project.
+Throughout various points in this document identifiers are mentioned, the rules for these are shared across all stages of the ChatterScript project.
 
 An *identifier* is any of the following symbols: an upper or lowercase letter A to Z, an underscore (`_`), a noncombining alphanumeric Unicode character in the Basic Multilingual Plane, or a character outside the Basic Multilingual Plane that isn't in the Private Use Area.
 After the first character digits, a period (`.`), and combining Unicode characters are also allowed.
 But not another `$` symbol.
 The minimum and maximum length of identifiers is unspecified.
 
-## Yarn Structure
+## ChatterScript Structure
 
-A Yarn script file is yarn file that contains one or more nodes and zero or more file tags.
+A ChatterScript file is text file that contains one or more nodes and zero or more file tags.
 
 ### File Tags
 
@@ -124,8 +124,8 @@ If the implementing program is ignoring later duplicates then the user should st
 
 ### Nodes
 
-A *node* is the single story element of a yarn file.
-Nodes are the story structural building blocks for yarn.
+A *node* is the single story element of a ChatterScript file.
+Nodes are the story structural building blocks for ChatterScript.
 Nodes are designed to contain pieces of a story and then have these story pieces linked together.
 This is not a requirement, everything could be done in a single node, this would just be unwieldy.
 A node must be comprised of a single header and a single body in that order.
@@ -198,7 +198,7 @@ Multiple hashtags can exist on a single line.
 
 ### Dialogue Statement
 
-A dialogue statement is a statement that represents a single line of text in the yarn story.
+A dialogue statement is a statement that represents a single line of text in the ChatterScript story.
 In most cases dialogue will be the bulk of the content of a node's body.
 Dialogue lines can be interpolated dialogue or raw dialogue.
 
@@ -245,17 +245,17 @@ Additional required command are unspecified.
 
 #### Generic Commands
 
-_Generic Commands_ are commands for sending messages from the yarn to the rest of the program.
+_Generic Commands_ are commands for sending messages from the ChatterScript to the rest of the program.
 Unlike the other commands generic commands don't impact the dialogue.
 They can be thought of as lines of dialogue that aren't to be shown in the game.
-Implementing programs must not modify the flow of the yarn based on the command.
+Implementing programs must not modify the flow of the ChatterScript based on the command.
 
 Generic commands can have any text except for the `#`, `{`, or `}` symbols inside of them.
 
 Generic commands can also have expressions inside of them, however as with dialogue these must be encapsulated by using the `{` and `}` symbols.
 Any expressions inside of a generic command without being encapsulated must be ignored and treated instead as regular text.
 
-```yarn
+```
 <<Fred Move Left 2>>
 <<Unlock Achievement MetSteve>>
 <<Log {$playerName} Died>>
@@ -264,7 +264,7 @@ are examples of generic commands.
 
 #### Jump
 
-The _jump_ command is how a yarn program can move from one node to another.
+The _jump_ command is how a ChatterScript program can move from one node to another.
 The jump has two components: the keyword and destination.
 The _keyword_ is the text `jump` and comes first in the command.
 
@@ -301,7 +301,7 @@ The _operator_ must be the text `to` or `=`.
 The _expression_ is any expression, unlike other uses of expressions this one must not be wrapped inside the `{` and `}` symbols.
 
 The following is an example of two set commands:
-```yarn
+```
 <<set $name to "General Kenobi">>
 <<set $boldness to $boldness + 1>>
 ```
@@ -311,7 +311,7 @@ The set command must not allow setting a variable to an expression whose value i
 
 #### Declare
 
-Variables in Yarn should be declared to let the implementing program know the type of values they hold.
+Variables in ChatterScript should be declared to let the implementing program know the type of values they hold.
 The intent of this is to allow the implementing program to set up memory and to provide guidance as to the usage of a variable directly from the writer.
 The declare command has four components: the keyword, the variable, the operator and the value, and must be presented in that order.
 
@@ -323,7 +323,7 @@ The _expression_ is any expression, unlike other uses of expressions this one mu
 The resulting value of the expression is used determine what type the value has been declared as, so if expression results in a boolean for example then the variable is declared as a boolean.
 
 The following is an example of two declaration commands:
-```yarn
+```
 <<declare $name = "General Kenobi">>
 <<declare $boldness = 1>>
 ```
@@ -375,7 +375,7 @@ Each of these, except the `endif`, have an attached block.
 The following is an example of flow control, the dialogue line to be shown will depend on the value of `$var`.
 If `$var` is `1`, the line `if-scope` will be presented, if it is `2` then the `elseif-scope` line will be shown.
 If neither of those are the case then the `else-scope` line will be shown.
-```yarn
+```
 <<if $var == 1>>
     if-scope
 <<elseif $var == 2>>
@@ -431,7 +431,7 @@ The endif exists to allow the implementing program know when the scope of the ot
 
 #### Scope and Blocks
 
-For the flow control to be useful there needs to be yarn statements which are run only when their appropriate expression evaluates to true.
+For the flow control to be useful there needs to be ChatterScript statements which are run only when their appropriate expression evaluates to true.
 Flow control allows for blocks of statements to be scoped to their commands.
 A _block_ is a collection of statements that are scoped to a particular part of the flow control.
 
@@ -445,7 +445,7 @@ While it is common for writers to indent their blocks relative to their scope it
 #### Handling 
 
 The implementing program must process all statements within the active blocks scope.
-The _active block_ is the block of yarn who's command expression evaluates to `true`.
+The _active block_ is the block of ChatterScript who's command expression evaluates to `true`.
 The block associated with the else command, if present, must only be determined as the active block if all other blocks expressions evaluate to false.
 
 An implementing program must not process any statements inside a block that is not the active block.
@@ -457,7 +457,7 @@ If no blocks expression evaluates to true then no block must be processed.
 Because the flow control commands allow for potentially multiple commands and their blocks to be the true one, the implementing program must select them in a top down approach when there is conflicting flow.
 For example take the following flow control:
 
-```yarn
+```
 <<if false>>
     if-scope
 <<elseif true>>
@@ -475,7 +475,7 @@ The implementing program should attempt to identify these scenarios however and 
 
 ### Options
 
-_Options_ are the means by which Yarn can present dialogue choices to the game and much as with flow control are an element that spans multiple lines.
+_Options_ are the means by which ChatterScript can present dialogue choices to the game and much as with flow control are an element that spans multiple lines.
 Options are comprised of one or more option lines.
 An _option line_ represents a single choice in an option, and are comprised of three parts: the keyword, the dialogue, the conditional in that order.
 
@@ -507,7 +507,7 @@ Each option line may optionally have a block of statements associated with that 
 Similar again to the flow control, if an option line is selected its associated block of must be processed by the implementing program
 If an option isn't chosen the associated block must not be processed.
 
-Unlike the flow control however there is no clear way to tell apart different blocks and options from other parts of the yarn, instead indentation is used to determine blocks and the end of the options.
+Unlike the flow control however there is no clear way to tell apart different blocks and options from other parts of the script, instead indentation is used to determine blocks and the end of the options.
 The rules for this must be followed:
 
 The first option line in the options determines the base indentation for the options statement, this is determined by counting the number of whitespace elements before the `->` symbol.
@@ -612,7 +612,7 @@ Examples of values include `1`, `true`, `"General Kenobi"`.
 
 ### Supported Types
 
-Yarn supports the following types and these must be supported by an implementing program:
+ChatterScript supports the following types and these must be supported by an implementing program:
 
 - number
 - boolean
@@ -636,8 +636,7 @@ The precision, storage, and form of the number internally by the implementing pr
 As an example of this in C# the `Decimal`, `Complex`, and `float` formats are valid (though some make more sense than others) but `int` is not.
 If a number is beyond the precision supported by the implementing program, the program must report this as an error.
 
-Strings must be capable of holding UTF-8 values as this is what the yarn language is written in, but the internals of this is unspecified provided all valid UTF-8 characters are supported.
-Strings in expressions must be encapsulated between `"` and `"` symbols.
+Strings must be capable of holding UTF-8 values. Strings in expressions must be encapsulated between `"` and `"` symbols.
 
 Booleans must be capable of representing the boolean logic values of `true` and `false`, however the specific implementation is undefined.
 Booleans must not be exposed as `1` and `0` to expressions even if they are represented this way internally by the implementing program.
@@ -647,7 +646,7 @@ Additional types supported are unspecified but should not be used.
 
 #### Numeric Examples
 
-The following are examples of valid numbers in Yarn:
+The following are examples of valid numbers in ChatterScript:
 
 ```
 1
@@ -691,11 +690,11 @@ The scope of variables is undefined, however implementing programs should err on
 
 #### Types
 
-Yarn is a statically typed language, in the context of Yarn this means variables have a type which represents which of the supported type's values it can hold.
+ChatterScript is a statically typed language, in the context of ChatterScript this means variables have a type which represents which of the supported type's values it can hold.
 Once a variable has its type determined either by declaration or inference it cannot change.
 The implementing program must not allow variables to hold values of types different from its own.
 
-Due to the nature of elements of Yarn being outside of the control of Yarn, notably functions, its possible for this requirement to be breached due to no fault of the implementing program or the Yarn script.
+Due to the nature of elements of ChatterScript being outside of the control of ChatterScript, notably functions, its possible for this requirement to be breached due to no fault of the implementing program or the ChatterScript script.
 However In these circumstances the implementing program must generate an error.
 
 ### Operations
@@ -814,7 +813,7 @@ The maximum and minimum number of allowed parameters a function can have is unde
 
 Examples of functions include the following;
 
-```yarn
+```
 getPlayerName()
 DetermineCurrentRoom($playerName, $target, 2)
 rad2Deg(1.5707963268)
@@ -823,8 +822,8 @@ rad2Deg(1.5707963268)
 #### Handling
 
 The handling of functions by the implementing program is unspecified, however the output type of a function must always return the same type of value between calls at runtime.
-The Yarn language makes no promises as to the order in which, or number of times an implementing program may call functions.
+The ChatterScript language makes no promises as to the order in which, or number of times an implementing program may call functions.
 
 The implementing program should allow external parts of the game to provide the return value of the function.
 If given the same input parameters multiple invocations of the same functions should return the same value each time.
-In general, and while not a specific requirement, implementing programs should err on the side of treating functions in Yarn as if they are [pure functions](https://en.wikipedia.org/wiki/Pure_function).
+In general, and while not a specific requirement, implementing programs should err on the side of treating functions in ChatterScript as if they are [pure functions](https://en.wikipedia.org/wiki/Pure_function).
