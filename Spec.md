@@ -656,7 +656,7 @@ The following are examples of valid numbers in ChatterScript:
 -1.414
 ```
 
-The following are examples of invalid numbers in Yarn:
+The following are examples of invalid numbers in ChatterScript:
 
 ```
 .5
