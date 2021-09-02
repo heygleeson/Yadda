@@ -115,6 +115,7 @@ _File tags_ are file level metadata that is relevant for all nodes in the file.
 A common use for file tags is for versioning the file.
 File tags must go at the start of a file before any nodes begin.
 File tags must have the `#` symbol at the start of them and then contain all text up until the end of the line.
+File tags that follow the `#` symbol prefix immediately with a double underscore are "private tags" intended for use with a ChatterScript editor. These private tags should **not** be exposed by the implementing program for reading.
 
 #### Duplicate Tags
 
@@ -150,6 +151,7 @@ An example of a header tag is the title tag: `Title:start`.
 Every node must have a title tag.
 Required or banned header tags beyond title are unspecified.
 The order of header tags is unspecified.
+Header tags that start with a double underscore are "private tags" intended for use with a ChatterScript editor. These private tags should **not** be exposed by the implementing program for reading.
 
 #### Title Tag
 
