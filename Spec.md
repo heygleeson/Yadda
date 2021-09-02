@@ -231,19 +231,18 @@ Escaping text must be supported in both normal and interpolated dialogue lines a
 
 ### Commands
 
-Commands are special statements that have no specific output to be shown but are used for passing messages and directions to other parts of the program and to control the flow of the story.
+Commands are special statements that have no specific output to be shown but are used for controlling the flow of the story and to pass messages to other parts of the program.
 
 The possible types of commands are:
 
+- `jump`
+- `stop`
+- `set`
+- `declare`
+- flow control: `if`, `else`, `elseif`, `endif`)
 - generic commands
-- jump
-- stop
-- set
-- declare
-- flow control
 
 All commands must start with the `<<` symbol and end with the `>>` symbol.
-Additional required command are unspecified.
 
 #### Generic Commands
 
