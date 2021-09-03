@@ -119,9 +119,8 @@ File tags that follow the `#` symbol prefix immediately with a double underscore
 
 #### Duplicate Tags
 
-Duplicate file tags within a file is invalid.
-The implementing program must either throw an error when encountering a duplicate file tag or ignore all but the first duplicate file tag.
-If the implementing program is ignoring later duplicates then the user should still be informed as the existence of duplicate file tags.
+Duplicate file tags within a file are invalid.
+The implementing program must throw an error when encountering a duplicate file tag.
 
 ### Nodes
 
@@ -166,9 +165,8 @@ The program should flag this as an error.
 
 #### Duplicate Tags
 
-Duplicate header tags within a node is invalid.
-The implementing program must either throw an error when encountering a duplicate tag or ignore all but the first duplicate tag.
-If the implementing program is ignoring later duplicates then the user should still be informed as the existence of duplicate tags.
+Duplicate header tags within a node are invalid.
+The implementing program must throw an error when encountering a duplicate tag.
 
 ### Body
 
